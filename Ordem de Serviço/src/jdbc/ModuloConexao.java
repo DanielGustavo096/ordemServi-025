@@ -20,9 +20,9 @@ public class ModuloConexao {
         //criando o driver  correspondente ao banco
         String driver = "com.mysql.cj.jdbc.Driver";
         //armazenando informações referente ao banco de dados
-        String url = "jdbc:mysql://localhost:3306/dbos2025?characterEncoding=utf-8"; //useTimezone=true&serverTimezone=UTC
+        String url = "jdbc:mysql://localhost:3306/daniel2ºinfo?characterEncoding=utf-8"; //useTimezone=true&serverTimezone=UTC
         String user = "root";
-        String senha = "IFROOcrxi18$";
+        String senha = "root";
         //estabelecer a conexão com o banco
         try {
             Class.forName(driver);
@@ -34,8 +34,8 @@ public class ModuloConexao {
             
         } catch (Exception e) {
             //a lihna abaixo server de apoio para esclarecer o erro
-            JOptionPane.showMessageDialog(null,"OPS!!! - Algo de errado aconteceu!!"+e);
-            System.out.println(e);
+//            JOptionPane.showMessageDialog(null,"OPS!!! - Algo de errado aconteceu!!"+e);
+//            System.out.println(e);
             return null;
         }
 

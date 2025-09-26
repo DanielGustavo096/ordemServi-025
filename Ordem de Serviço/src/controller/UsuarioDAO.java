@@ -19,10 +19,10 @@ import view.TelaPrincipal;
  */
 public class UsuarioDAO {
     
-    private Connection con;
+    private Connection conexao;
     
     public UsuarioDAO(){
-        this.con = ModuloConexao.conectar();
+        this.conexao = ModuloConexao.conectar();
     }
     
     //Metodo efetuaLogin
@@ -33,28 +33,39 @@ public class UsuarioDAO {
             //1 passo - SQL
             String sql = "select * from tbusuarios where usuario = ? and senha = ?";
             PreparedStatement stmt;
-            stmt = con.prepareStatement(sql);
+            stmt = conexao.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, senha);
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
+                String perfil = rs.getString(6);
+                if(perfil.equals("admin")){
                 //Usuario logou
                 TelaPrincipal tela = new TelaPrincipal();
                 tela.setVisible(true);
-                
-            } else {
+                tela.JMnItmUsuario.setEnabled(true);
+                tela.jMnRelatorio.setEnabled(true);
+                tela.jlbUsuario.setText(rs.getString(6));
+                }  else{
+                TelaPrincipal tela = new TelaPrincipal();
+                tela.setVisible(true);
+                tela.jlbUsuario.setText(rs.getString(6));
+            }
+            }else {
                 //Dados incorretos
                 JOptionPane.showMessageDialog(null, "Dados incorretos!");
                 new TelaLogin().setVisible(true);
             }
+            
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro : " + erro);
         }
 
     }
+    
     
     
 }
